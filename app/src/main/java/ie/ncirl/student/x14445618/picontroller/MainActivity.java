@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String publishHumid = "false";
     String publishLed = "false";
 
+    int tempSampleInterval; //Default the temperature sensor to take readings every 5 seconds
+
     Switch tempSw;
     Switch humidSw;
     Switch ledSw;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView temperatureStatusTv;
     TextView humidityStatusTv;
     TextView ledStatusTv;
+
+    EditText tempSampleIntervalEt;
 
 
 
@@ -56,13 +62,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         humidityStatusTv = findViewById(R.id.humidityStatusTv);
         ledStatusTv = findViewById(R.id.ledStatusTv);
 
+        tempSampleIntervalEt = findViewById(R.id.temperatureSampleIntervalEt);
+
         tempSw= findViewById(R.id.temperatureSwitch);
         tempSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked ==true){
-                    publishTemperature = "true";
-                    temperatureStatusTv.setText("Temperature Sensor is ON");
-                    sendJsonToDweet();
+                    tempSampleInterval = Integer.parseInt(tempSampleIntervalEt.getText().toString());
+
+                    if(tempSampleInterval<=1){ //Make sure the text is not blank and that or number is no less than 1 (Dweet limits api to 1 sec)
+                        Toast.makeText(MainActivity.this, "Please enter a valid time...", Toast.LENGTH_SHORT).show();
+                        tempSw.setChecked(false);
+                    }
+                    else{
+                        publishTemperature = "true";
+                        temperatureStatusTv.setText("Temperature Sensor is ON");
+                        sendJsonToDweet();
+                    }
+
                 }
                 else{
                     publishTemperature = "false";
@@ -116,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void sendJsonToDweet() {
         try {
             dweetJsonObj.put("publish_temp",publishTemperature);
+            dweetJsonObj.put("temperature_sample_interval",tempSampleInterval);
             dweetJsonObj.put("publish_humid",publishHumid);
             dweetJsonObj.put("publish_led",publishLed);
         }
