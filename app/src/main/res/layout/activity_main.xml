@@ -89,7 +89,7 @@
     <!--Each Sensor gets container (Linear Layout) -->
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="75dp"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:layout_margin="5dp">
@@ -128,7 +128,7 @@
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="number"/>
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -153,7 +153,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="75dp"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -165,7 +166,7 @@
                         android:id="@+id/humiditySwitch"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Humidity %"
                         android:textOff="Off"
@@ -179,7 +180,24 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <EditText
+                        android:id="@+id/humiditySampleIntervalEt"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
 
                     <TextView
                         android:id="@+id/humidityStatusTv"

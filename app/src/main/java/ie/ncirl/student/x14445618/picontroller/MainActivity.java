@@ -33,22 +33,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Map<String,String>  myMap = new HashMap<>();
     JSONObject dweetJsonObj = new JSONObject();
 
-    //Declare Strings to define what action the sensor does
+    //String Declarations - to define what action the sensor does (true/false = publish/don't publish)
     String publishTemperature = "false";
     String publishHumid = "false";
     String publishLed = "false";
 
-    int tempSampleInterval; //Default the temperature sensor to take readings every 5 seconds
-
+    //Switch Declarations
     Switch tempSw;
     Switch humidSw;
     Switch ledSw;
 
+    //Textviews which display the status of the sensor (ON/OFF)
     TextView temperatureStatusTv;
     TextView humidityStatusTv;
     TextView ledStatusTv;
 
+    //Edit Text Fields which allow user to enter the sensor interval time
     EditText tempSampleIntervalEt;
+    EditText humiditySampleIntervalEt;
+
+    //Int which stores the values parsed interval times from the EditText Field
+    int tempSampleInterval =5; //Default the time Intervals sent from the Application to 5 seconds
+    int humidityInterval =5;
 
 
 
@@ -62,28 +68,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         humidityStatusTv = findViewById(R.id.humidityStatusTv);
         ledStatusTv = findViewById(R.id.ledStatusTv);
 
-        tempSampleIntervalEt = findViewById(R.id.temperatureSampleIntervalEt);
 
+        tempSampleIntervalEt = findViewById(R.id.temperatureSampleIntervalEt);
+        humiditySampleIntervalEt = findViewById(R.id.humiditySampleIntervalEt);
+
+        //Declare switch and logic
         tempSw= findViewById(R.id.temperatureSwitch);
         tempSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked ==true){
+                // Parse String from EditText to Int Resolving Issues From: https://stackoverflow.com/questions/2709253/converting-a-string-to-an-integer-on-android
+                try{
                     tempSampleInterval = Integer.parseInt(tempSampleIntervalEt.getText().toString());
+                }
+                catch(NumberFormatException nfe) {
+                    System.out.println(nfe);
+                };
 
-                    if(tempSampleInterval<=1){ //Make sure the text is not blank and that or number is no less than 1 (Dweet limits api to 1 sec)
-                        Toast.makeText(MainActivity.this, "Please enter a valid time...", Toast.LENGTH_SHORT).show();
+                if(isChecked ==true){
+
+                    /*if(tempSampleInterval<=1){ //Make sure the text is not blank and that or number is no less than 1 (Dweet limits api to 1 sec)
+                        Toast.makeText(MainActivity.this, "Please enter a valid value...", Toast.LENGTH_SHORT).show();
                         tempSw.setChecked(false);
-                    }
-                    else{
-                        publishTemperature = "true";
-                        temperatureStatusTv.setText("Temperature Sensor is ON");
-                        sendJsonToDweet();
-                    }
+                    }*/
+                    //else{
+                        publishTemperature = "true";//Turn Sensor On
+                        temperatureStatusTv.setText("Temperature Sensor is ON \n " + "Interval: " + tempSampleInterval + " sec");
+                        tempSampleIntervalEt.setText("");
+                        sendJsonToDweet();//Update the Dweet.io API with the specified values
+                    //}
 
                 }
                 else{
-                    publishTemperature = "false";
+                    publishTemperature = "false";//Turn Sensor Off
                     temperatureStatusTv.setText("Temperature Sensor is OFF");
+                    tempSampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
             }
@@ -92,14 +110,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         humidSw = findViewById(R.id.humiditySwitch);
         humidSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Parse String from EditText to Int Resolving Issues From: https://stackoverflow.com/questions/2709253/converting-a-string-to-an-integer-on-android
+                try{
+                    humidityInterval  = Integer.parseInt(humiditySampleIntervalEt.getText().toString());
+                }
+                catch(NumberFormatException nfe) {
+                    System.out.println(nfe);
+                };
+
                 if(isChecked ==true){
-                    publishHumid = "true";
-                    humidityStatusTv.setText("Humidity Sensor is ON");
-                    sendJsonToDweet();
+
+                    /*if(humiditySampleInterval<=1){ //Make sure the text is not blank and that or number is no less than 1 (Dweet limits api to 1 sec)
+                        Toast.makeText(MainActivity.this, "Please enter a valid value...", Toast.LENGTH_SHORT).show();
+                        humidSw.setChecked(false);
+                    }*/
+                    //else{
+                        publishHumid = "true";//Turn Sensor On
+                        humidityStatusTv.setText("Humidity Sensor is ON \n " + "Interval: " + humidityInterval + " sec");
+                        humiditySampleIntervalEt.setText("");
+                        sendJsonToDweet();//Update the Dweet.io API with the specified values
+
+                   // }
+
                 }
                 else{
-                    publishHumid = "false";
+                    publishHumid = "false";//Turn Sensor Off
                     humidityStatusTv.setText("Humidity Sensor is OFF");
+                    humiditySampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
             }
@@ -132,16 +169,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void sendJsonToDweet() {
         try {
-            dweetJsonObj.put("publish_temp",publishTemperature);
-            dweetJsonObj.put("temperature_sample_interval",tempSampleInterval);
-            dweetJsonObj.put("publish_humid",publishHumid);
-            dweetJsonObj.put("publish_led",publishLed);
+            dweetJsonObj.put("publishTemp",publishTemperature);
+            dweetJsonObj.put("publishHumid",publishHumid);
+            dweetJsonObj.put("tempTime",tempSampleInterval);
+            //dweetJsonObj.put("humidityTime",humidityInterval);
+            //dweetJsonObj.put("publishLed",publishLed);
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
 
-        String url = "https://dweet.io/dweet/for/leonsAndroid";
+        String url = "https://dweet.io/dweet/for/leonsPhone9";
         final CustomJSONRequest jsonRequest = new CustomJSONRequest(Request.Method.POST, url,
                 dweetJsonObj, this, this);
         jsonRequest.setTag("test");
