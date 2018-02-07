@@ -36,25 +36,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //String Declarations - to define what action the sensor does (true/false = publish/don't publish)
     String publishTemperature = "false";
     String publishHumid = "false";
+    String publishDistance = "false";
     String publishLed = "false";
 
     //Switch Declarations
     Switch tempSw;
     Switch humidSw;
+    Switch distanceSw;
     Switch ledSw;
 
     //Textviews which display the status of the sensor (ON/OFF)
     TextView temperatureStatusTv;
     TextView humidityStatusTv;
+    TextView distanceStatusTv;
     TextView ledStatusTv;
 
     //Edit Text Fields which allow user to enter the sensor interval time
     EditText tempSampleIntervalEt;
     EditText humiditySampleIntervalEt;
+    EditText distanceSampleIntervalEt;
 
     //Int which stores the values parsed interval times from the EditText Field
     int tempSampleInterval =5; //Default the time Intervals sent from the Application to 5 seconds
     int humidityInterval =5;
+    int distanceInterval  = 5;
 
 
 
@@ -66,11 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         temperatureStatusTv = findViewById(R.id.temperatureStatusTv);
         humidityStatusTv = findViewById(R.id.humidityStatusTv);
+        distanceStatusTv = findViewById(R.id.distanceStatusTv);
         ledStatusTv = findViewById(R.id.ledStatusTv);
 
 
         tempSampleIntervalEt = findViewById(R.id.temperatureSampleIntervalEt);
         humiditySampleIntervalEt = findViewById(R.id.humiditySampleIntervalEt);
+        distanceSampleIntervalEt = findViewById(R.id.distanceSampleIntervalEt);
 
         //Declare switch and logic
         tempSw= findViewById(R.id.temperatureSwitch);
@@ -142,6 +149,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        distanceSw = findViewById(R.id.distanceSwitch);
+        distanceSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Parse String from EditText to Int Resolving Issues From: https://stackoverflow.com/questions/2709253/converting-a-string-to-an-integer-on-android
+                try{
+                    distanceInterval  = Integer.parseInt(distanceSampleIntervalEt.getText().toString());
+                }
+                catch(NumberFormatException nfe) {
+                    System.out.println(nfe);
+                };
+
+                if(isChecked ==true){
+
+                    /*if(humiditySampleInterval<=1){ //Make sure the text is not blank and that or number is no less than 1 (Dweet limits api to 1 sec)
+                        Toast.makeText(MainActivity.this, "Please enter a valid value...", Toast.LENGTH_SHORT).show();
+                        humidSw.setChecked(false);
+                    }*/
+                    //else{
+                    publishDistance = "true";//Turn Sensor On
+                    distanceStatusTv.setText("Distance Sensor is ON \n " + "Interval: " + humidityInterval + " sec");
+                    distanceSampleIntervalEt.setText("");
+                    sendJsonToDweet();//Update the Dweet.io API with the specified values
+
+                    // }
+
+                }
+                else{
+                    publishDistance = "false";//Turn Sensor Off
+                    distanceStatusTv.setText("Distance Sensor is OFF");
+                    distanceSampleIntervalEt.setText("");
+                    sendJsonToDweet();
+                }
+            }
+        });
+
         ledSw = findViewById(R.id.ledSwitch);
         ledSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -171,15 +213,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             dweetJsonObj.put("publishTemp",publishTemperature);
             dweetJsonObj.put("publishHumid",publishHumid);
+            //dweetJsonObj.put("publishDistance",publishDistance);
             dweetJsonObj.put("tempTime",tempSampleInterval);
             //dweetJsonObj.put("humidityTime",humidityInterval);
+
             //dweetJsonObj.put("publishLed",publishLed);
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
 
-        String url = "https://dweet.io/dweet/for/leonsPhone9";
+        String url = "https://dweet.io/dweet/for/leonsPhone10";
         final CustomJSONRequest jsonRequest = new CustomJSONRequest(Request.Method.POST, url,
                 dweetJsonObj, this, this);
         jsonRequest.setTag("test");

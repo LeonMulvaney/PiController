@@ -209,6 +209,70 @@
                 </LinearLayout>
             </LinearLayout>
 
+
+            <!--Start of Distance Container -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Switch
+                        android:id="@+id/distanceSwitch"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Distance"
+                        android:textOff="Off"
+                        android:textOn="On"
+                        android:theme="@style/SwitchCompatTheme">
+                    </Switch>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <EditText
+                        android:id="@+id/distanceSampleIntervalEt"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        android:id="@+id/distanceStatusTv"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_vertical" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Start of Led Container -->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="75dp"
@@ -232,7 +296,6 @@
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
                     </Switch>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -250,6 +313,8 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+
 
 
             <TextView
