@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PiController</string>
+    <string name ="author">Leon Mulvaney</string>
 </resources>

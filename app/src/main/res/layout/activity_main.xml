@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,32 +7,33 @@
     tools:context="ie.ncirl.student.x14445618.picontroller.MainActivity"
     android:orientation="vertical"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
-
-    <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/logo"/>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="25dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:textSize="17dp"/>
+    android:focusableInTouchMode="true"
+    android:animateLayoutChanges="true">
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/logo"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="17sp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -272,6 +273,68 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!--Start of Distance Container -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Switch
+                        android:id="@+id/buttonSwitch"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Button"
+                        android:textOff="Off"
+                        android:textOn="On"
+                        android:theme="@style/SwitchCompatTheme">
+                    </Switch>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <EditText
+                        android:id="@+id/buttonSampleIntervalEt"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        android:id="@+id/buttonStatusTv"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_vertical" />
+
+                </LinearLayout>
+            </LinearLayout>
+
             <!--Start of Led Container -->
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -315,8 +378,6 @@
             </LinearLayout>
 
 
-
-
             <TextView
                 android:id="@+id/resultTv"
                 android:layout_width="wrap_content"
@@ -326,6 +387,18 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
         </LinearLayout>
+
     </ScrollView>
-</LinearLayout>
+
+    <WebView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dweetWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_marginTop="25dp"/>
+
+</RelativeLayout>
+
