@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         humidityStatusTv = findViewById(R.id.humidityStatusTv);
         distanceStatusTv = findViewById(R.id.distanceStatusTv);
         buttonStatusTv = findViewById(R.id.buttonStatusTv);
-        ledStatusTv = findViewById(R.id.ledStatusTv);
 
 
 
@@ -249,23 +248,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        ledSw = findViewById(R.id.ledSwitch);
-        ledSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked ==true){
-                    publishLed = "true";
-                    ledStatusTv.setText("LED is ON");
-                    sendJsonToDweet();
-                }
-                else{
-                    publishLed = "false";
-                    ledStatusTv.setText("LED is OFF");
-                    sendJsonToDweet();
-                }
-            }
-        });
-
-
         resultTv = findViewById(R.id.resultTv);
         mQueue = CustomQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
@@ -287,7 +269,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dweetJsonObj.put("distanceTime",distanceInterval);
             dweetJsonObj.put("buttonTime",buttonInterval);
 
-            //dweetJsonObj.put("publishLed",publishLed);
         }
         catch (JSONException e) {
             e.printStackTrace();
