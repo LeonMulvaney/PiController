@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }*/
                     //else{
                         publishTemperature = "true";//Turn Sensor On
-                        temperatureStatusTv.setText("Temperature Sensor is ON \n " + "Interval: " + tempSampleInterval + " sec");
+                        temperatureStatusTv.setText("Relay 1 ON");
                         tempSampleIntervalEt.setText("");
                         sendJsonToDweet();//Update the Dweet.io API with the specified values
                     //}
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     publishTemperature = "false";//Turn Sensor Off
-                    temperatureStatusTv.setText("Temperature Sensor is OFF");
+                    temperatureStatusTv.setText("Relay 1 OFF");
                     tempSampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }*/
                     //else{
                         publishHumid = "true";//Turn Sensor On
-                        humidityStatusTv.setText("Humidity Sensor is ON \n " + "Interval: " + humidityInterval + " sec");
+                        humidityStatusTv.setText("Relay 2 is ON");
                         humiditySampleIntervalEt.setText("");
                         sendJsonToDweet();//Update the Dweet.io API with the specified values
 
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     publishHumid = "false";//Turn Sensor Off
-                    humidityStatusTv.setText("Humidity Sensor is OFF");
+                    humidityStatusTv.setText("Relay 2 is OFF");
                     humiditySampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }*/
                     //else{
                     publishDistance = "true";//Turn Sensor On
-                    distanceStatusTv.setText("Distance Sensor is ON \n " + "Interval: " + distanceInterval + " sec");
+                    distanceStatusTv.setText("Relay 3  ON");
                     distanceSampleIntervalEt.setText("");
                     sendJsonToDweet();//Update the Dweet.io API with the specified values
 
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     publishDistance = "false";//Turn Sensor Off
-                    distanceStatusTv.setText("Distance Sensor is OFF");
+                    distanceStatusTv.setText("Relay 3 is OFF");
                     distanceSampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -232,16 +232,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         buttonSw.setChecked(false);
                     }*/
                     //else{
-                    publishButton = "true";//Turn Sensor On
-                    buttonStatusTv.setText("Button Actuator is ON \n " + "Interval: " + buttonInterval + " sec");
+                    publishLed = "true";//Turn Sensor On
+                    buttonStatusTv.setText("LED is ON");
                     buttonSampleIntervalEt.setText("");
                     sendJsonToDweet();//Update the Dweet.io API with the specified values
                     //}
 
                 }
                 else{
-                    publishButton = "false";//Turn Sensor Off
-                    buttonStatusTv.setText("Button Actuator is OFF");
+                    publishLed = "false";//Turn Sensor Off
+                    buttonStatusTv.setText("LED is OFF");
                     buttonSampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -258,16 +258,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void sendJsonToDweet() {
         try {
-            dweetJsonObj.put("publishTemp",publishTemperature);
-            dweetJsonObj.put("publishHumid",publishHumid);
-            dweetJsonObj.put("publishDistance",publishDistance);
-            dweetJsonObj.put("publishButton",publishButton);
-            dweetJsonObj.put("publishLed",publishLed);
+            //dweetJsonObj.put("publishTemp",publishTemperature);
+            //dweetJsonObj.put("publishHumid",publishHumid);
+            //dweetJsonObj.put("publishDistance",publishDistance);
+            //dweetJsonObj.put("publishButton",publishButton);
+            dweetJsonObj.put("relay1",publishTemperature);
+            dweetJsonObj.put("relay2",publishHumid);
+            dweetJsonObj.put("relay3",publishDistance);
 
-            dweetJsonObj.put("tempTime",tempSampleInterval);
-            dweetJsonObj.put("humidTime",humidityInterval);
-            dweetJsonObj.put("distanceTime",distanceInterval);
-            dweetJsonObj.put("buttonTime",buttonInterval);
+
+
+
+            //dweetJsonObj.put("tempTime",tempSampleInterval);
+            //dweetJsonObj.put("humidTime",humidityInterval);
+            //dweetJsonObj.put("distanceTime",distanceInterval);
+            //dweetJsonObj.put("buttonTime",buttonInterval);
 
         }
         catch (JSONException e) {

@@ -52,7 +52,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Sensor\nType:"/>
+                        android:text="Relay\ No:"/>
 
 
                 </LinearLayout>
@@ -82,7 +82,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Sensor\nStatus:"/>
+                        android:text="Relay\nStatus:"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -107,7 +107,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Temp °C"
+                        android:text="Relay 1"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
@@ -169,7 +169,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Humidity %"
+                        android:text="Relay 2"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
@@ -231,7 +231,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Distance"
+                        android:text="Relay 3"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
@@ -293,7 +293,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Button"
+                        android:text="Extra"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
@@ -356,6 +356,7 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:layout_marginTop="25dp"/>
+
 
 </RelativeLayout>
 
