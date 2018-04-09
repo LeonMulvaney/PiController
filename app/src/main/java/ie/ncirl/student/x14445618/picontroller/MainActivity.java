@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     JSONObject dweetJsonObj;
 
     //String Declarations - to define what action the sensor does (true/false = publish/don't publish)
-    String publishTemperature = "false";
-    String publishHumid = "false";
+    String publishHeating = "false";
+    String publishCooling = "false";
     String publishDistance = "false";
     String publishButton = "false";
     String publishLed = "false";
@@ -128,16 +128,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         tempSw.setChecked(false);
                     }*/
                     //else{
-                        publishTemperature = "true";//Turn Sensor On
-                        temperatureStatusTv.setText("Relay 1 ON");
+                    publishHeating = "true";//Turn Sensor On
+                        temperatureStatusTv.setText("Heating Circuit ON");
                         tempSampleIntervalEt.setText("");
                         sendJsonToDweet();//Update the Dweet.io API with the specified values
                     //}
 
                 }
                 else{
-                    publishTemperature = "false";//Turn Sensor Off
-                    temperatureStatusTv.setText("Relay 1 OFF");
+                    publishHeating = "false";//Turn Sensor Off
+                    temperatureStatusTv.setText("Heating Circuit OFF");
                     tempSampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         humidSw.setChecked(false);
                     }*/
                     //else{
-                        publishHumid = "true";//Turn Sensor On
-                        humidityStatusTv.setText("Relay 2 is ON");
+                    publishCooling = "true";//Turn Sensor On
+                        humidityStatusTv.setText("Cooling Circuit ON");
                         humiditySampleIntervalEt.setText("");
                         sendJsonToDweet();//Update the Dweet.io API with the specified values
 
@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
                 else{
-                    publishHumid = "false";//Turn Sensor Off
-                    humidityStatusTv.setText("Relay 2 is OFF");
+                    publishCooling = "false";//Turn Sensor Off
+                    humidityStatusTv.setText("Cooling Circuit OFF");
                     humiditySampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }*/
                     //else{
                     publishDistance = "true";//Turn Sensor On
-                    distanceStatusTv.setText("Relay 3  ON");
+                    distanceStatusTv.setText("Lighting Circuit  ON");
                     distanceSampleIntervalEt.setText("");
                     sendJsonToDweet();//Update the Dweet.io API with the specified values
 
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     publishDistance = "false";//Turn Sensor Off
-                    distanceStatusTv.setText("Relay 3 is OFF");
+                    distanceStatusTv.setText("Lighting Circuit OFF");
                     distanceSampleIntervalEt.setText("");
                     sendJsonToDweet();
                 }
@@ -258,13 +258,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void sendJsonToDweet() {
         try {
-            //dweetJsonObj.put("publishTemp",publishTemperature);
-            //dweetJsonObj.put("publishHumid",publishHumid);
+            //dweetJsonObj.put("publishTemp",publishHeating);
+            //dweetJsonObj.put("publishCooling",publishCooling);
             //dweetJsonObj.put("publishDistance",publishDistance);
             //dweetJsonObj.put("publishButton",publishButton);
-            dweetJsonObj.put("relay1",publishTemperature);
-            dweetJsonObj.put("relay2",publishHumid);
-            dweetJsonObj.put("relay3",publishDistance);
+            dweetJsonObj.put("heatingCircuit",publishHeating);
+            dweetJsonObj.put("coolingCircuit",publishCooling);
+            dweetJsonObj.put("lightingCircuit",publishDistance);
 
 
 

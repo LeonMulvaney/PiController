@@ -82,7 +82,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Relay\nStatus:"/>
+                        android:text="Circuit\nStatus:"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -107,7 +107,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Relay 1"
+                        android:text="Heating Circuit"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
@@ -169,7 +169,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Relay 2"
+                        android:text="Cooling \n Circuit"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
@@ -231,7 +231,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Relay 3"
+                        android:text="Lighting Circuit"
                         android:textOff="Off"
                         android:textOn="On"
                         android:theme="@style/SwitchCompatTheme">
